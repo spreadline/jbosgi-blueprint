@@ -1,0 +1,13 @@
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
+  
+  <bean id="beanA" class="org.jboss.test.osgi.blueprint.parser.common.BeanA">
+  	<description>BeanA Description</description>
+  </bean>
+  
+  <bean id="beanB" class="org.jboss.test.osgi.blueprint.parser.common.BeanB">
+  	<description>BeanB Description</description>
+    <property name="beanA" ref="beanA"/>
+  </bean>
+  
+</blueprint>

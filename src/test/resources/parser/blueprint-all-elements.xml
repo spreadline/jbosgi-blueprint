@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+<blueprint default-activation="" default-activation="" default-availablility="" any="">
+  <description>
+  <type-converters>
+    <bean>
+    <reference>
+    <ref component-id="req">
+    <any>
+  </type-converters>
+  <bean id="" activation="" depends-on="" class="" init-method="" destroy-method="" factory-method="" factory-ref="" scope="" any="">
+    <description>
+    <argument index="" type="" ref="" value="">
+      <description>
+      <service>
+      <reference-list>
+      <bean>
+      <reference>
+      <ref>
+      <any>
+      <idref>
+      <value>
+      <list>
+      <set>
+      <map>
+      <array>
+      <props>
+        <prop key="req" value="">content</prop>
+      </props>
+      <null>  
+    </argument>
+    <property name="req" ref="" value="">
+      <description>
+      <service>
+      <reference-list>
+      <bean>
+      <reference>
+      <ref>
+      <any>
+      <idref>
+      <value>
+      <list>
+      <set>
+      <map>
+      <array>
+      <props>
+      <null>  
+    </property>
+    <any>
+  </bean>
+  <service id="" activation="" depends-on="" interface="" ref="" auto-export="" ranking="" any="">
+    <description>
+    <interfaces>
+      <value>
+    </interfaces>
+    <service-properties>
+      <entry key="req" value="">
+        <service>
+        <reference-list>
+        <bean>
+        <reference>
+        <ref>
+        <any>
+        <idref>
+        <value>
+        <list>
+        <set>
+        <map>
+        <array>
+        <props>
+        <null>  
+      </entry>
+      <any>
+    </service-properties>
+    <registration-listener ref="" registration-method="" unregistration-method="">
+      <bean>
+      <reference>
+      <ref>
+      <any>
+    </registration-listener>
+    <bean>
+    <reference>
+    <ref>
+    <any>
+  </service>
+  <reference id="" activation="" depends-on="" interface="" filter="" component-name="" availability="" any="" timeout="">
+    <description>
+    <reference-listener>
+    <any>
+  </reference>
+  <reference-list id="" activation="" depends-on="" interface="" filter="" component-name="" availability="" any="" timeout="" member-type="">
+    <description>
+    <reference-listener>
+    <any>
+  </reference-list>
+  <any>
+</blueprint>
+-->
+
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 http://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd"
+  default-activation="eager" default-availability="mandatory" default-timeout="300000">
+
+  <description>blueprint description</description>
+
+  <type-converters>
+    <bean class="foo.TypeConverterBean" />
+    <reference component-name="typeConverterReferenceA" />
+    <reference component-name="typeConverterReferenceB" />
+    <ref component-id="typeConverterRefA" />
+    <ref component-id="typeConverterRefB" />
+  </type-converters>
+  
+  <bean id="typeConverterRefA" class="foo.TypeConverterRefA"/>
+  <bean id="typeConverterRefB" class="foo.TypeConverterRefB"/>
+
+  <service id="idServiceA" auto-export="disabled" depends-on="someServiceDependency" interface="foo.ServiceInterface" ranking="0">
+    <description>service description</description>
+    <interfaces>
+      <value>foo.ServiceInterfA</value>
+      <value>foo.ServiceInterfB</value>
+    </interfaces>
+    <service-properties>
+      <entry key="keyA" value="valueA" />
+      <entry key="keyB" value="valueB" />
+    </service-properties>
+    <registration-listener registration-method="regMethod" unregistration-method="unregMethod">
+      <bean class="foo.RegistrationListenerBean" />
+    </registration-listener>
+    <registration-listener ref="regListenerRef" />
+    <bean class="foo.ServiceBean" />
+  </service>
+
+  <service id="idServiceB" ref="serviceRef" />
+
+  <reference-list id="myEventListeners" interface="com.xyz.EventListener" />
+  
+  <!-- 
+    availablitity="optional" 
+  -->
+  <reference component-name="referenceCompName" interface="foo.referenceInterf" filter="referenceFilter" >
+    <description>reference description</description>
+    <reference-listener ref="referenceListenerA" bind-method="bindMethod" unbind-method="unbindMethod" />
+    <reference-listener ref="referenceListenerB" />
+  </reference>
+
+  <bean id="beanA" class="foo.Bean" init-method="initMethod" destroy-method="destroyMethod" factory-method="factoryMethod"
+    factory-ref="factoryComponent" scope="singleton"/>
+
+</blueprint>
