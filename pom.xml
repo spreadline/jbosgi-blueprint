@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+  <!-- ====================================================================== -->
+  <!--                                                                        -->
+  <!--  JBoss, the OpenSource J2EE webOS                                      -->
+  <!--                                                                        -->
+  <!--  Distributable under LGPL license.                                     -->
+  <!--  See terms of license at http://www.gnu.org.                           -->
+  <!--                                                                        -->
+  <!-- ====================================================================== -->
+
+  <!-- $Id$ -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <name>JBossOSGi Reactor - Blueprint</name>
+
+  <groupId>org.jboss.osgi.bundles</groupId>
+  <artifactId>jboss-osgi-blueprint</artifactId>
+  <packaging>bundle</packaging>
+
+  <version>1.0.1.Beta1-SNAPSHOT</version>
+
+  <!-- Parent -->
+  <parent>
+    <groupId>org.jboss.osgi</groupId>
+    <artifactId>jboss-osgi-parent</artifactId>
+    <version>1.0.4</version>
+  </parent>
+
+  <!-- Subversion -->
+  <scm>
+    <connection>scm:svn:http://anonsvn.jboss.org/repos/jbossas/projects/jboss-osgi/projects/bundles/blueprint/trunk</connection>
+    <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/jboss-osgi/projects/bundles/blueprint/trunk</developerConnection>
+    <url>http://fisheye.jboss.com/qsearch/JBossOSGi</url>
+  </scm>
+  
+  <!-- Properties -->
+  <properties>
+    <version.apache.aries.blueprint>1.0.0.20100120</version.apache.aries.blueprint>
+    <version.apache.aries.util>1.0.0.20100120</version.apache.aries.util>
+    <version.jboss.osgi.common>1.0.3</version.jboss.osgi.common>
+    <version.jboss.osgi.framework>1.0.0.Alpha3</version.jboss.osgi.framework>
+    <version.jboss.osgi.husky>1.0.3</version.jboss.osgi.husky>
+    <version.jboss.osgi.jmx>1.0.3</version.jboss.osgi.jmx>
+    <version.jboss.osgi.spi>1.0.4</version.jboss.osgi.spi>
+    <version.osgi>4.2.0</version.osgi>
+    
+    <surefire.jpda.args />
+  </properties>
+
+  <!-- Dependencies -->
+  <dependencies>
+    <dependency>
+      <groupId>biz.aQute</groupId>
+      <artifactId>bnd</artifactId>
+    </dependency>
+  
+    <!-- Compile Dependencies -->
+    <dependency>
+      <groupId>org.jboss.osgi</groupId>
+      <artifactId>jboss-osgi-spi</artifactId>
+      <version>${version.jboss.osgi.spi}</version>
+    </dependency>
+
+    <!-- Provided Dependencies -->
+    <dependency>
+      <groupId>org.apache.aries.blueprint</groupId>
+      <artifactId>org.apache.aries.blueprint</artifactId>
+      <version>${version.apache.aries.blueprint}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.aries</groupId>
+      <artifactId>org.apache.aries.util</artifactId>
+      <version>${version.apache.aries.util}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.osgi.bundles</groupId>
+      <artifactId>jboss-osgi-common</artifactId>
+      <version>${version.jboss.osgi.common}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.osgi.bundles</groupId>
+      <artifactId>jboss-osgi-husky</artifactId>
+      <version>${version.jboss.osgi.husky}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.osgi.bundles</groupId>
+      <artifactId>jboss-osgi-jmx</artifactId>
+      <version>${version.jboss.osgi.jmx}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.osgi.runtime</groupId>
+      <artifactId>jboss-osgi-framework</artifactId>
+      <version>${version.jboss.osgi.framework}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- OSGi Dependencies -->
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>org.osgi.core</artifactId>
+      <version>${version.osgi}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>org.osgi.compendium</artifactId>
+      <version>${version.osgi}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Test Dependencies -->
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <!-- Build -->
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <configuration>
+          <instructions>
+            <Bundle-SymbolicName>${artifactId}</Bundle-SymbolicName>
+            <Bundle-Activator>org.jboss.osgi.blueprint.extender.BlueprintActivator</Bundle-Activator>
+            <Private-Package>
+              org.jboss.osgi.blueprint.*
+            </Private-Package>
+            <Export-Package>
+              org.jboss.osgi.blueprint;version=${version},
+            </Export-Package>
+            <Import-Package>
+              org.jboss.osgi.spi.capability;version=1.0,
+              org.osgi.framework,
+              org.osgi.service.blueprint.container;version=1.0,
+              org.osgi.service.blueprint.reflect;version=1.0,
+            </Import-Package>
+          </instructions>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-artifacts</id>
+            <phase>package</phase>
+            <goals>
+              <goal>attach-artifact</goal>
+            </goals>
+            <configuration>
+              <artifacts>
+                <artifact>
+                  <!-- For some reason the distribution javadoc module needs this -->
+                  <file>target/${artifactId}-${version}-sources.jar</file>
+                  <classifier>sources</classifier>
+                  <type>jar</type>
+                </artifact>
+              </artifacts>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>bundles</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>directory-single</goal>
+            </goals>
+            <configuration>
+              <finalName>test-libs</finalName>
+              <ignoreDirFormatExtensions>true</ignoreDirFormatExtensions>
+              <appendAssemblyId>false</appendAssemblyId>
+              <descriptors>
+                <descriptor>scripts/assembly-bundles.xml</descriptor>
+              </descriptors>
+            </configuration>
+          </execution>
+          <execution>
+            <id>compendium</id>
+            <phase>test-compile</phase>
+            <goals>
+              <goal>directory-single</goal>
+            </goals>
+            <configuration>
+              <finalName>test-libs</finalName>
+              <ignoreDirFormatExtensions>true</ignoreDirFormatExtensions>
+              <appendAssemblyId>false</appendAssemblyId>
+              <descriptors>
+                <descriptor>scripts/assembly-compendium.xml</descriptor>
+              </descriptors>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>build-test-jars</id>
+            <phase>integration-test</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                <property name="maven.runtime.classpath" refid="maven.runtime.classpath" />
+                <property name="artifactId" value="${artifactId}" />
+                <property name="tests.output.dir" value="${project.build.directory}" />
+                <property name="build.artifact" value="${project.build.finalName}" />
+                <ant antfile="scripts/antrun-test-jars.xml" />
+              </tasks>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+        <executions>
+          <execution>
+            <id>surefire-integration-tests</id>
+            <phase>integration-test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+            <configuration>
+              <skip>false</skip>
+              <argLine>${surefire.jpda.args}</argLine>
+              <systemProperties>
+                <property>
+                  <name>java.protocol.handler.pkgs</name>
+                  <value>org.jboss.net.protocol|org.jboss.virtual.protocol</value>
+                </property>
+                <property>
+                  <name>log4j.output.dir</name>
+                  <value>${project.build.directory}</value>
+                </property>
+                <property>
+                  <name>org.jboss.osgi.husky.Invoker</name>
+                  <value>org.jboss.osgi.husky.internal.OSGiInvoker</value>
+                </property>
+                <property>
+                  <name>test.archive.directory</name>
+                  <value>${project.build.directory}/test-libs</value>
+                </property>
+              </systemProperties>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <!-- Profiles -->
+  <profiles>
+
+    <!--
+      Name: framework-equinox
+      Descr: Setup for Equinox framework integration testing
+    -->
+    <profile>
+      <id>framework-equinox</id>
+      <activation>
+        <property>
+          <name>framework</name>
+          <value>equinox</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <skipTests>true</skipTests>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!--
+      Name: framework-felix
+      Descr: Setup for Equinox framework integration testing
+    -->
+    <profile>
+      <id>framework-felix</id>
+      <activation>
+        <property>
+          <name>framework</name>
+          <value>felix</value>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <skipTests>true</skipTests>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!--
+      Name: jpda
+      Descr: Enable JPDA remote debuging
+    -->
+    <profile>
+      <id>jpda</id>
+      <activation>
+        <property>
+          <name>jpda</name>
+        </property>
+      </activation>
+      <properties>
+        <surefire.jpda.args>-Xrunjdwp:transport=dt_socket,address=8787,server=y,suspend=y</surefire.jpda.args>
+      </properties>
+    </profile>
+    
+  </profiles>
+</project>
