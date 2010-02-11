@@ -20,13 +20,13 @@
   <artifactId>jboss-osgi-blueprint</artifactId>
   <packaging>bundle</packaging>
 
-  <version>1.0.1.Beta1-SNAPSHOT</version>
+  <version>1.0.0.Beta2-SNAPSHOT</version>
 
   <!-- Parent -->
   <parent>
     <groupId>org.jboss.osgi</groupId>
     <artifactId>jboss-osgi-parent</artifactId>
-    <version>1.0.4</version>
+    <version>1.0.5-SNAPSHOT</version>
   </parent>
 
   <!-- Subversion -->
@@ -40,11 +40,11 @@
   <properties>
     <version.apache.aries.blueprint>1.0.0.20100120</version.apache.aries.blueprint>
     <version.apache.aries.util>1.0.0.20100120</version.apache.aries.util>
-    <version.jboss.osgi.common>1.0.3</version.jboss.osgi.common>
+    <version.jboss.osgi.common>1.0.4-SNAPSHOT</version.jboss.osgi.common>
     <version.jboss.osgi.framework>1.0.0.Alpha3</version.jboss.osgi.framework>
-    <version.jboss.osgi.husky>1.0.3</version.jboss.osgi.husky>
-    <version.jboss.osgi.jmx>1.0.3</version.jboss.osgi.jmx>
-    <version.jboss.osgi.spi>1.0.4</version.jboss.osgi.spi>
+    <version.jboss.osgi.husky>1.0.4-SNAPSHOT</version.jboss.osgi.husky>
+    <version.jboss.osgi.jmx>1.0.4-SNAPSHOT</version.jboss.osgi.jmx>
+    <version.jboss.osgi.spi>1.0.5-SNAPSHOT</version.jboss.osgi.spi>
     <version.osgi>4.2.0</version.osgi>
     
     <surefire.jpda.args />
@@ -70,12 +70,24 @@
       <artifactId>org.apache.aries.blueprint</artifactId>
       <version>${version.apache.aries.blueprint}</version>
       <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.apache.aries</groupId>
       <artifactId>org.apache.aries.util</artifactId>
       <version>${version.apache.aries.util}</version>
       <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>org.jboss.osgi.bundles</groupId>
@@ -117,11 +129,6 @@
     </dependency>
 
     <!-- Test Dependencies -->
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 
   <!-- Build -->
@@ -254,7 +261,7 @@
                 </property>
                 <property>
                   <name>org.jboss.osgi.husky.Invoker</name>
-                  <value>org.jboss.osgi.husky.internal.OSGiInvoker</value>
+                  <value>org.jboss.osgi.husky.internal.AbstractInvoker</value>
                 </property>
                 <property>
                   <name>test.archive.directory</name>
