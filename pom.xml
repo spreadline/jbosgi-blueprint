@@ -22,7 +22,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <name>JBossOSGi Reactor - Blueprint</name>
+  <name>JBossOSGi Bundles - Blueprint</name>
 
   <groupId>org.jboss.osgi.bundles</groupId>
   <artifactId>jboss-osgi-blueprint</artifactId>
@@ -155,7 +155,7 @@
             <Bundle-SymbolicName>${artifactId}</Bundle-SymbolicName>
             <Bundle-Activator>org.jboss.osgi.blueprint.internal.BlueprintActivator</Bundle-Activator>
             <Export-Package>
-              org.jboss.osgi.blueprint;version=${version}
+              org.jboss.osgi.blueprint;version=${version},
             </Export-Package>
             <Import-Package>
               javax.xml.parsers, 
@@ -166,7 +166,7 @@
                
               org.jboss.logging;version="[2.1,3.0)",
               
-              org.jboss.osgi.deployment.interceptor;version="[1.0,2.0)",
+              org.jboss.osgi.deployment.interceptor;version="[1.0,2.0)";resolution:=optional,
               org.jboss.osgi.spi*;version="[1.0,2.0)",
               
               org.osgi.framework,
@@ -181,9 +181,14 @@
               !net.sf.cglib*, 
               !org.objectweb*, 
             </Import-Package>
+            <Embed-Transitive>true</Embed-Transitive>
             <Embed-Dependency>
+              org.apache.aries.blueprint.api;inline=false,
               org.apache.aries.blueprint.core;inline=false,
             </Embed-Dependency>
+            <_exportcontents>
+              org.osgi.service.blueprint*;version="1.0",
+            </_exportcontents>
           </instructions>
         </configuration>
       </plugin>

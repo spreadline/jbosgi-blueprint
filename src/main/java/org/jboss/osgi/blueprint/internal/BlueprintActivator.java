@@ -26,7 +26,6 @@ package org.jboss.osgi.blueprint.internal;
 import org.apache.aries.blueprint.container.BlueprintExtender;
 import org.jboss.logging.Logger;
 import org.jboss.osgi.blueprint.BlueprintService;
-import org.jboss.osgi.deployment.interceptor.LifecycleInterceptorService;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
@@ -51,7 +50,7 @@ public class BlueprintActivator implements BundleActivator
       BlueprintService service = new BlueprintService(){};
       context.registerService(BlueprintService.class.getName(), service, null);
       
-      ServiceReference sref = context.getServiceReference(LifecycleInterceptorService.class.getName());
+      ServiceReference sref = context.getServiceReference("org.jboss.osgi.deployment.interceptor.LifecycleInterceptorService");
       if (sref != null)
       {
          log.debug("Start: " + BlueprintInterceptor.class.getName());
