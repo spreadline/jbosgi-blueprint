@@ -166,6 +166,7 @@
                
               org.jboss.logging;version="[2.1,3.0)",
               
+              org.jboss.osgi.deployment.interceptor;version="[1.0,2.0)",
               org.jboss.osgi.spi*;version="[1.0,2.0)",
               
               org.osgi.framework,

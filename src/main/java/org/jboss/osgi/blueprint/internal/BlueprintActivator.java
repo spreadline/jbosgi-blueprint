@@ -26,8 +26,10 @@ package org.jboss.osgi.blueprint.internal;
 import org.apache.aries.blueprint.container.BlueprintExtender;
 import org.jboss.logging.Logger;
 import org.jboss.osgi.blueprint.BlueprintService;
+import org.jboss.osgi.deployment.interceptor.LifecycleInterceptorService;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
 
 /**
  * The Blueprint activator registeres the {@link BlueprintService} 
@@ -40,7 +42,8 @@ public class BlueprintActivator implements BundleActivator
    // Provide logging
    private static final Logger log = Logger.getLogger(BlueprintActivator.class);
    
-   BundleActivator ariesActivator;
+   private BundleActivator ariesActivator;
+   private BlueprintInterceptor jbossInterceptor;
    
    public void start(BundleContext context) throws Exception
    {
@@ -48,10 +51,19 @@ public class BlueprintActivator implements BundleActivator
       BlueprintService service = new BlueprintService(){};
       context.registerService(BlueprintService.class.getName(), service, null);
       
-      log.debug("Start: " + BlueprintExtender.class.getName());
-      
-      ariesActivator = new BlueprintExtender();
-      ariesActivator.start(context);
+      ServiceReference sref = context.getServiceReference(LifecycleInterceptorService.class.getName());
+      if (sref != null)
+      {
+         log.debug("Start: " + BlueprintInterceptor.class.getName());
+         jbossInterceptor = new BlueprintInterceptor();
+         jbossInterceptor.start(context);
+      }
+      else
+      {
+         log.debug("Start: " + BlueprintExtender.class.getName());
+         ariesActivator = new BlueprintExtender();
+         ariesActivator.start(context);
+      }
    }
 
    public void stop(BundleContext context) throws Exception
@@ -60,6 +72,11 @@ public class BlueprintActivator implements BundleActivator
       {
          log.debug("Stop: " + ariesActivator.getClass().getName());
          ariesActivator.stop(context);
+      }
+      else if (jbossInterceptor != null)
+      {
+         log.debug("Stop: " + jbossInterceptor.getClass().getName());
+         jbossInterceptor.stop(context);
       }
    }
 }
