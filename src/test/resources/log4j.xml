@@ -32,6 +32,7 @@
   <!-- Limit categories -->
   <!-- ================ -->
 
+  <!-- 
   <category name="org.jboss.classloading">
     <priority value="TRACE" />
   </category>
@@ -40,12 +41,11 @@
     <priority value="TRACE" />
   </category>
   
-  <category name="org.jboss.osgi">
+  <category name="org.jboss.deployers">
     <priority value="TRACE" />
   </category>
   
-  <!-- Show jboss deployer traces 
-  <category name="org.jboss.deployers">
+  <category name="org.jboss.osgi">
     <priority value="TRACE" />
   </category>
   -->
