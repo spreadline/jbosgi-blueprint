@@ -32,6 +32,18 @@
   <!-- Limit categories -->
   <!-- ================ -->
 
+  <category name="org.jboss.classloading">
+    <priority value="TRACE" />
+  </category>
+  
+  <category name="org.jboss.classloader">
+    <priority value="TRACE" />
+  </category>
+  
+  <category name="org.jboss.osgi">
+    <priority value="TRACE" />
+  </category>
+  
   <!-- Show jboss deployer traces 
   <category name="org.jboss.deployers">
     <priority value="TRACE" />

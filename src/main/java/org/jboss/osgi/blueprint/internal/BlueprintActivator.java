@@ -24,6 +24,7 @@ package org.jboss.osgi.blueprint.internal;
 //$Id$
 
 import org.apache.aries.blueprint.container.BlueprintExtender;
+import org.jboss.logging.Logger;
 import org.jboss.osgi.blueprint.BlueprintService;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -36,14 +37,18 @@ import org.osgi.framework.BundleContext;
  */
 public class BlueprintActivator implements BundleActivator
 {
-   BundleActivator ariesActivator;
+   // Provide logging
+   private static final Logger log = Logger.getLogger(BlueprintActivator.class);
    
+   BundleActivator ariesActivator;
    
    public void start(BundleContext context) throws Exception
    {
       // Register the marker service
       BlueprintService service = new BlueprintService(){};
       context.registerService(BlueprintService.class.getName(), service, null);
+      
+      log.debug("Start: " + BlueprintExtender.class.getName());
       
       ariesActivator = new BlueprintExtender();
       ariesActivator.start(context);
@@ -52,6 +57,9 @@ public class BlueprintActivator implements BundleActivator
    public void stop(BundleContext context) throws Exception
    {
       if (ariesActivator != null)
+      {
+         log.debug("Stop: " + ariesActivator.getClass().getName());
          ariesActivator.stop(context);
+      }
    }
 }

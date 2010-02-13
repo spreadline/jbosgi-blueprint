@@ -19,23 +19,17 @@
         <entry><key>org.osgi.framework.storage.clean</key><value>onFirstInit</value></entry>
         <entry><key>org.osgi.framework.system.packages.extra</key><value>
           
-          <!-- [JBOSGI-145]  JAXB classes are loaded from the system classpath -->
-          com.sun.xml.internal.bind.v2,
-          
-          <!-- loging -->
+          <!-- logging -->
           org.apache.log4j;version=1.2,
-          org.slf4j;version=1.5,
+          org.jboss.logging;version=2.1,
           
           <!-- jboss -->
-          org.jboss.beans.metadata.plugins;version=2.0,
-          org.jboss.beans.metadata.plugins.builder;version=2.0,
-          org.jboss.beans.metadata.spi;version=2.0,
-          org.jboss.beans.metadata.spi.builder;version=2.0,
-          org.jboss.dependency.spi;version=2.0,
-          org.jboss.kernel.spi.dependency;version=2.0,
-          org.jboss.logging;version=2.0,
-          org.jboss.reflect.spi;version=2.0,
-          org.jboss.util;version=2.2,
+          org.jboss.beans.metadata.plugins;version=2.2,
+          org.jboss.beans.metadata.plugins.builder;version=2.2,
+          org.jboss.beans.metadata.spi;version=2.2,
+          org.jboss.beans.metadata.spi.builder;version=2.2,
+          org.jboss.dependency.spi;version=2.2,
+          org.jboss.kernel.spi.dependency;version=2.2,
           
           <!-- jboss-osgi -->
           org.jboss.osgi.spi;version=1.0,
@@ -43,8 +37,7 @@
           org.jboss.osgi.spi.framework;version=1.0,
           org.jboss.osgi.spi.management;version=1.0,
           org.jboss.osgi.spi.service;version=1.0,
-          org.jboss.osgi.spi.util;version=1.0,
-          org.jboss.osgi.testing,
+          org.jboss.osgi.spi.util;version=1.0
         </value></entry>
       </map>
     </property>
@@ -73,17 +66,25 @@
      </list>
     </property>
   </bean>
+  <!-- 
+  <bean name="OSGiBundleResolver" class="org.jboss.osgi.framework.resolver.internal.basic.BasicResolverImpl">
+    <constructor><parameter><inject bean="OSGiBundleManager" /></parameter></constructor>
+  </bean>
+  -->
   <bean name="OSGiControllerContextPlugin" class="org.jboss.osgi.framework.bundle.ControllerContextPluginImpl">
     <constructor>
       <parameter><inject bean="OSGiBundleManager" /></parameter>
-      <parameter><inject bean="DeploymentRegistry" /></parameter>
+      <parameter><inject bean="OSGiDeploymentRegistry" /></parameter>
     </constructor>
   </bean>
   <bean name="OSGiFrameworkEventsPlugin" class="org.jboss.osgi.framework.plugins.internal.FrameworkEventsPluginImpl">
     <constructor><parameter><inject bean="OSGiBundleManager" /></parameter></constructor>
   </bean>
   <bean name="OSGiServiceManager" class="org.jboss.osgi.framework.bundle.ServiceManagerPluginImpl">
-    <constructor><parameter><inject bean="OSGiBundleManager" /></parameter></constructor>
+    <constructor>
+      <parameter><inject bean="OSGiBundleManager" /></parameter>
+      <parameter><inject bean="OSGiDeploymentRegistry" /></parameter>
+    </constructor>
   </bean>
   <bean name="OSGiStoragePlugin" class="org.jboss.osgi.framework.plugins.internal.BundleStoragePluginImpl">
     <constructor><parameter><inject bean="OSGiBundleManager" /></parameter></constructor>
@@ -119,6 +120,18 @@
   <!--
   ********************************
   *                              *  
+  *  OSGi Interceptors           *
+  *                              *
+  ********************************
+  
+  <bean name="WebXMLVerifier" class="org.jboss.osgi.framework.service.internal.WebXMLVerifierInterceptor">
+    <constructor><parameter><inject bean="OSGiBundleManager" /></parameter></constructor>
+  </bean>
+  -->
+  
+  <!--
+  ********************************
+  *                              *  
   *  OSGi Deployment             *
   *                              *
   ********************************
@@ -131,7 +144,7 @@
   </bean>
 
   <!-- The deployment registry -->
-  <bean name="DeploymentRegistry" class="org.jboss.deployers.structure.spi.helpers.AbstractDeploymentRegistry"/>
+  <bean name="OSGiDeploymentRegistry" class="org.jboss.deployers.structure.spi.helpers.AbstractDeploymentRegistry"/>
 
   <!-- The holder for deployers that determine structure -->
   <bean name="StructuralDeployers" class="org.jboss.deployers.vfs.plugins.structure.VFSStructuralDeployersImpl">
@@ -166,7 +179,7 @@
     <constructor>
       <parameter class="org.jboss.dependency.spi.Controller"><inject bean="jboss.kernel:service=KernelController" /></parameter>
     </constructor>
-    <property name="deploymentRegistry"><inject bean="DeploymentRegistry"/></property>
+    <property name="deploymentRegistry"><inject bean="OSGiDeploymentRegistry"/></property>
   </bean>
 
   <!-- OSGI Deployment -->
