@@ -43,7 +43,6 @@ public class BlueprintCapability extends Capability
       super(BlueprintService.class.getName());
 
       addBundle("bundles/org.apache.aries.util.jar");
-      addBundle("bundles/org.apache.aries.blueprint.jar");
       addBundle("bundles/jboss-osgi-blueprint.jar");
    }
 }

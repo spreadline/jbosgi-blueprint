@@ -19,7 +19,6 @@
         <include>*:jboss-osgi-husky:jar</include>
         <include>*:jboss-osgi-jmx:jar</include>
         <include>*:jboss-osgi-jndi:jar</include>
-        <include>*:org.apache.aries.blueprint:jar</include>
         <include>*:org.apache.aries.util:jar</include>
       </includes>
       <useStrictFiltering>true</useStrictFiltering>

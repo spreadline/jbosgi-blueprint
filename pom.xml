@@ -67,7 +67,13 @@
     <!-- Provided Dependencies -->
     <dependency>
       <groupId>org.apache.aries.blueprint</groupId>
-      <artifactId>org.apache.aries.blueprint</artifactId>
+      <artifactId>org.apache.aries.blueprint.api</artifactId>
+      <version>${version.apache.aries.blueprint}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.aries.blueprint</groupId>
+      <artifactId>org.apache.aries.blueprint.core</artifactId>
       <version>${version.apache.aries.blueprint}</version>
       <scope>provided</scope>
       <exclusions>
@@ -140,19 +146,36 @@
         <configuration>
           <instructions>
             <Bundle-SymbolicName>${artifactId}</Bundle-SymbolicName>
-            <Bundle-Activator>org.jboss.osgi.blueprint.extender.BlueprintActivator</Bundle-Activator>
-            <Private-Package>
-              org.jboss.osgi.blueprint.*
-            </Private-Package>
+            <Bundle-Activator>org.jboss.osgi.blueprint.internal.BlueprintActivator</Bundle-Activator>
             <Export-Package>
               org.jboss.osgi.blueprint;version=${version},
+              org.osgi.service.blueprint*;version="1.0"
             </Export-Package>
             <Import-Package>
-              org.jboss.osgi.spi.capability;version=1.0,
+              javax.xml.parsers, 
+              javax.xml.transform*, 
+              javax.xml.validation,
+               
+              org.apache.aries.util.tracker;version="[1.0,1.1)", 
+              org.jboss.osgi.spi*;version="[1.0,1.1)",
               org.osgi.framework,
-              org.osgi.service.blueprint.container;version=1.0,
-              org.osgi.service.blueprint.reflect;version=1.0,
+              org.osgi.service.event, 
+              org.osgi.util.tracker,
+              
+              org.slf4j, 
+              org.w3c.dom, 
+              org.xml.sax,
+               
+              !net.sf.cglib*, 
+              !org.objectweb*, 
             </Import-Package>
+            <Embed-Dependency>
+              org.apache.aries.blueprint.api;inline=false,
+              org.apache.aries.blueprint.core;inline=false,
+            </Embed-Dependency>
+            <_exportcontents>
+              org.osgi.service.blueprint*;version=1.0
+            </_exportcontents>
           </instructions>
         </configuration>
       </plugin>

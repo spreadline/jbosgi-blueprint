@@ -19,10 +19,11 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jboss.osgi.blueprint.extender;
+package org.jboss.osgi.blueprint.internal;
 
 //$Id$
 
+import org.apache.aries.blueprint.container.BlueprintExtender;
 import org.jboss.osgi.blueprint.BlueprintService;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -35,14 +36,22 @@ import org.osgi.framework.BundleContext;
  */
 public class BlueprintActivator implements BundleActivator
 {
+   BundleActivator ariesActivator;
+   
+   
    public void start(BundleContext context) throws Exception
    {
       // Register the marker service
       BlueprintService service = new BlueprintService(){};
       context.registerService(BlueprintService.class.getName(), service, null);
+      
+      ariesActivator = new BlueprintExtender();
+      ariesActivator.start(context);
    }
 
    public void stop(BundleContext context) throws Exception
    {
+      if (ariesActivator != null)
+         ariesActivator.stop(context);
    }
 }
