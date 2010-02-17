@@ -151,7 +151,6 @@ class BlueprintEventDispatcher implements BlueprintListener, SynchronousBundleLi
         }
     }
 
-    @SuppressWarnings({"ThrowableResultOfMethodCallIgnored"})
     private static String toString(BlueprintEvent event) {
         return "BlueprintEvent[type=" + getEventType(event.getType())
                 + (event.getDependencies() != null ? ", dependencies=" + Arrays.asList(event.getDependencies()) : "")
@@ -241,7 +240,6 @@ class BlueprintEventDispatcher implements BlueprintListener, SynchronousBundleLi
             tracker.open();
         }
 
-        @SuppressWarnings({"ThrowableResultOfMethodCallIgnored"})
         public void blueprintEvent(BlueprintEvent event) {
             EventAdmin eventAdmin = (EventAdmin) tracker.getService();
             if (eventAdmin == null) {
