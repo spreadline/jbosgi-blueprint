@@ -111,7 +111,7 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.jboss.osgi.bundles</groupId>
+      <groupId>org.jboss.osgi.jmx</groupId>
       <artifactId>jboss-osgi-jmx</artifactId>
       <version>${version.jboss.osgi.jmx}</version>
       <scope>provided</scope>
