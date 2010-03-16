@@ -37,23 +37,18 @@
     <version>1.0.5-SNAPSHOT</version>
   </parent>
 
-  <!-- Subversion -->
-  <scm>
-    <connection>scm:svn:http://anonsvn.jboss.org/repos/jbossas/projects/jboss-osgi/projects/bundles/blueprint/trunk</connection>
-    <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/jboss-osgi/projects/bundles/blueprint/trunk</developerConnection>
-    <url>http://fisheye.jboss.com/qsearch/JBossOSGi</url>
-  </scm>
-  
   <!-- Properties -->
   <properties>
     <version.apache.aries.blueprint>1.0.0-incubating-SNAPSHOT</version.apache.aries.blueprint>
+    <version.apache.aries.jmx>1.0.0-incubating-SNAPSHOT</version.apache.aries.jmx>
     <version.apache.aries.util>1.0.0-incubating-SNAPSHOT</version.apache.aries.util>
+    <version.apache.felix.log>1.0.0</version.apache.felix.log>
     <version.jboss.osgi.common>1.0.4-SNAPSHOT</version.jboss.osgi.common>
     <version.jboss.osgi.framework>1.0.0.Alpha4-SNAPSHOT</version.jboss.osgi.framework>
     <version.jboss.osgi.husky>1.0.4-SNAPSHOT</version.jboss.osgi.husky>
     <version.jboss.osgi.jmx>1.0.4-SNAPSHOT</version.jboss.osgi.jmx>
     <version.jboss.osgi.spi>1.0.5-SNAPSHOT</version.jboss.osgi.spi>
-    <version.jboss.osgi.testing>1.0.0-SNAPSHOT</version.jboss.osgi.testing>
+    <version.jboss.osgi.vfs>1.0.0-SNAPSHOT</version.jboss.osgi.vfs>
     <version.osgi>4.2.0</version.osgi>
     
     <surefire.jpda.args />
@@ -87,6 +82,12 @@
       </exclusions>
     </dependency>
     <dependency>
+      <groupId>org.apache.aries.jmx</groupId>
+      <artifactId>org.apache.aries.jmx</artifactId>
+      <version>${version.apache.aries.jmx}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>org.apache.aries</groupId>
       <artifactId>org.apache.aries.util</artifactId>
       <version>${version.apache.aries.util}</version>
@@ -95,6 +96,22 @@
         <exclusion>
           <groupId>org.slf4j</groupId>
           <artifactId>slf4j-api</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.apache.felix.log</artifactId>
+      <version>${version.apache.felix.log}</version>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>org.osgi.core</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>org.osgi.compendium</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
@@ -116,12 +133,6 @@
       <version>${version.jboss.osgi.jmx}</version>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>org.jboss.osgi.runtime</groupId>
-      <artifactId>jboss-osgi-framework</artifactId>
-      <version>${version.jboss.osgi.framework}</version>
-      <scope>provided</scope>
-    </dependency>
 
     <!-- OSGi Dependencies -->
     <dependency>
@@ -139,9 +150,9 @@
 
     <!-- Test Dependencies -->
     <dependency>
-      <groupId>org.jboss.osgi</groupId>
-      <artifactId>jboss-osgi-testing</artifactId>
-      <version>${version.jboss.osgi.testing}</version>
+      <groupId>org.jboss.osgi.framework</groupId>
+      <artifactId>jboss-osgi-framework-vfs30</artifactId>
+      <version>${version.jboss.osgi.framework}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -273,7 +284,7 @@
               <systemProperties>
                 <property>
                   <name>java.protocol.handler.pkgs</name>
-                  <value>org.jboss.net.protocol|org.jboss.virtual.protocol</value>
+                  <value>org.jboss.net.protocol|org.jboss.vfs.protocol</value>
                 </property>
                 <property>
                   <name>log4j.output.dir</name>
@@ -295,56 +306,15 @@
     </plugins>
   </build>
 
+  <!-- Subversion -->
+  <scm>
+    <connection>scm:svn:http://anonsvn.jboss.org/repos/jbossas/projects/jboss-osgi/projects/bundles/blueprint/trunk</connection>
+    <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/jboss-osgi/projects/bundles/blueprint/trunk</developerConnection>
+    <url>http://fisheye.jboss.com/qsearch/JBossOSGi</url>
+  </scm>
+  
   <!-- Profiles -->
   <profiles>
-
-    <!--
-      Name: framework-equinox
-      Descr: Setup for Equinox framework integration testing
-    -->
-    <profile>
-      <id>framework-equinox</id>
-      <activation>
-        <property>
-          <name>framework</name>
-          <value>equinox</value>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-              <skipTests>true</skipTests>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
-
-    <!--
-      Name: framework-felix
-      Descr: Setup for Equinox framework integration testing
-    -->
-    <profile>
-      <id>framework-felix</id>
-      <activation>
-        <property>
-          <name>framework</name>
-          <value>felix</value>
-        </property>
-      </activation>
-      <build>
-        <plugins>
-          <plugin>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-              <skipTests>true</skipTests>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
 
     <!--
       Name: jpda

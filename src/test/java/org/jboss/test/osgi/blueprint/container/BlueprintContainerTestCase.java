@@ -41,9 +41,10 @@ import org.jboss.osgi.husky.BridgeFactory;
 import org.jboss.osgi.husky.HuskyCapability;
 import org.jboss.osgi.husky.RuntimeContext;
 import org.jboss.osgi.jmx.JMXCapability;
+import org.jboss.osgi.spi.capability.LogServiceCapability;
 import org.jboss.osgi.testing.OSGiBundle;
 import org.jboss.osgi.testing.OSGiRuntime;
-import org.jboss.osgi.testing.OSGiTestHelper;
+import org.jboss.osgi.testing.OSGiRuntimeHelper;
 import org.jboss.test.osgi.blueprint.container.bundle.BeanA;
 import org.jboss.test.osgi.blueprint.container.bundle.BeanB;
 import org.jboss.test.osgi.blueprint.container.bundle.ServiceA;
@@ -79,13 +80,14 @@ public class BlueprintContainerTestCase
    {
       if (context == null)
       {
-         runtime = new OSGiTestHelper().getEmbeddedRuntime();
+         runtime = new OSGiRuntimeHelper().getEmbeddedRuntime();
          runtime.addCapability(new HuskyCapability());
+         runtime.addCapability(new LogServiceCapability());
          runtime.addCapability(new JMXCapability());
          runtime.addCapability(new BlueprintCapability());
-         
+
          huskyBridge = BridgeFactory.getBridge();
-         
+
          OSGiBundle bundle = runtime.installBundle("container-basic.jar");
          bundle.start();
       }
@@ -103,9 +105,9 @@ public class BlueprintContainerTestCase
    {
       if (context == null)
          huskyBridge.run();
-      
+
       assumeNotNull(context);
-      
+
       Bundle bundle = context.getBundle();
       assertEquals("container-basic", bundle.getSymbolicName());
    }
@@ -115,9 +117,9 @@ public class BlueprintContainerTestCase
    {
       if (context == null)
          huskyBridge.run();
-      
+
       assumeNotNull(context);
-      
+
       BlueprintContainer bpContainer = getBlueprintContainer();
       assertNotNull("BlueprintContainer available", bpContainer);
    }
@@ -127,9 +129,9 @@ public class BlueprintContainerTestCase
    {
       if (context == null)
          huskyBridge.run();
-      
+
       assumeNotNull(context);
-      
+
       BlueprintContainer bpContainer = getBlueprintContainer();
       BeanA beanA = (BeanA)bpContainer.getComponentInstance("beanA");
       assertNotNull("ComponentInstance available", beanA);
@@ -140,25 +142,25 @@ public class BlueprintContainerTestCase
    {
       if (context == null)
          huskyBridge.run();
-      
+
       assumeNotNull(context);
-      
+
       ServiceReference srefA = context.getServiceReference(ServiceA.class.getName());
       assertNotNull("ServiceReference available", srefA);
-      
+
       ServiceA serviceA = (ServiceA)context.getService(srefA);
       assertNotNull("Service available", serviceA);
-      
+
       ServiceReference srefB = context.getServiceReference(ServiceB.class.getName());
       assertNotNull("ServiceReference available", srefB);
-      
+
       ServiceB serviceB = (ServiceB)context.getService(srefB);
       assertNotNull("Service available", serviceB);
-      
+
       BeanB beanB = (BeanB)serviceB;
       BeanA beanA = beanB.getBeanA();
       assertNotNull("BeanA available", beanA);
-      
+
       MBeanServer mbeanServer = beanA.getMbeanServer();
       assertNotNull("MBeanServer available", mbeanServer);
    }
@@ -168,12 +170,12 @@ public class BlueprintContainerTestCase
    {
       if (context == null)
          huskyBridge.run();
-      
+
       assumeNotNull(context);
-      
+
       BlueprintContainer bpContainer = getBlueprintContainer();
       ComponentMetadata compMetadata = bpContainer.getComponentMetadata("beanA");
-      
+
       assertNotNull("ComponentMetadata not null", compMetadata);
       assertEquals("beanA", compMetadata.getId());
    }
@@ -183,9 +185,9 @@ public class BlueprintContainerTestCase
    {
       if (context == null)
          huskyBridge.run();
-      
+
       assumeNotNull(context);
-      
+
       BlueprintContainer bpContainer = getBlueprintContainer();
       Set<String> compNames = bpContainer.getComponentIds();
 
@@ -202,15 +204,15 @@ public class BlueprintContainerTestCase
    {
       if (context == null)
          huskyBridge.run();
-      
+
       assumeNotNull(context);
-      
+
       BlueprintContainer bpContainer = getBlueprintContainer();
       Collection<BeanMetadata> bcMetadata = bpContainer.getMetadata(BeanMetadata.class);
-      
+
       assertNotNull("BeanComponentsMetadata not null", bcMetadata);
       assertEquals("BeanComponentsMetadata size", 2, bcMetadata.size());
-      
+
       BeanMetadata bmd = bcMetadata.iterator().next();
       assertEquals("beanA", bmd.getId());
       assertEquals(BeanA.class.getName(), bmd.getClassName());
@@ -221,27 +223,27 @@ public class BlueprintContainerTestCase
    {
       if (context == null)
          huskyBridge.run();
-      
+
       assumeNotNull(context);
-      
+
       BlueprintContainer bpContainer = getBlueprintContainer();
       Collection<ServiceMetadata> servicesMetadata = bpContainer.getMetadata(ServiceMetadata.class);
 
       assertNotNull("ServiceMetadata not null", servicesMetadata);
       assertEquals("ServiceMetadata size", 2, servicesMetadata.size());
-      
+
       Iterator<ServiceMetadata> itServices = servicesMetadata.iterator();
       ServiceMetadata serviceA = itServices.next();
       assertEquals("serviceA", serviceA.getId());
-      
+
       List<String> interfaceNamesA = serviceA.getInterfaces();
       assertNotNull("InterfaceNames not null", interfaceNamesA);
       assertEquals("InterfaceNames size", 1, interfaceNamesA.size());
       assertEquals("InterfaceName", ServiceA.class.getName(), interfaceNamesA.get(0));
-      
+
       ServiceMetadata serviceB = itServices.next();
       assertEquals("serviceB", serviceB.getId());
-      
+
       List<String> interfaceNamesB = serviceB.getInterfaces();
       assertNotNull("InterfaceNames not null", interfaceNamesB);
       assertEquals("InterfaceNames size", 1, interfaceNamesB.size());
@@ -253,18 +255,18 @@ public class BlueprintContainerTestCase
    {
       if (context == null)
          huskyBridge.run();
-      
+
       assumeNotNull(context);
-      
+
       BlueprintContainer bpContainer = getBlueprintContainer();
       Collection<ReferenceMetadata> srefsMetadata = bpContainer.getMetadata(ReferenceMetadata.class);
 
       assertNotNull("ReferenceMetadata not null", srefsMetadata);
       assertEquals("ReferenceMetadata size", 1, srefsMetadata.size());
-      
+
       ReferenceMetadata srefMetadata = srefsMetadata.iterator().next();
       assertEquals("mbeanService", srefMetadata.getId());
-      
+
       String interfaceName = srefMetadata.getInterface();
       assertNotNull("InterfaceName not null", interfaceName);
       assertEquals("InterfaceName", MBeanServer.class.getName(), interfaceName);
@@ -274,7 +276,7 @@ public class BlueprintContainerTestCase
    {
       // 10sec for processing of STARTING event
       int timeout = 50;
-      
+
       ServiceReference sref = null;
       while (sref == null && 0 < timeout--)
       {
@@ -282,7 +284,7 @@ public class BlueprintContainerTestCase
          Thread.sleep(200);
       }
       assertNotNull("BlueprintContainer not null", sref);
-      
+
       BlueprintContainer bpContainer = (BlueprintContainer)context.getService(sref);
       return bpContainer;
    }

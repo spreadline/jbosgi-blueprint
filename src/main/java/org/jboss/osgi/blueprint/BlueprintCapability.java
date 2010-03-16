@@ -24,6 +24,7 @@ package org.jboss.osgi.blueprint;
 //$Id$
 
 import org.jboss.osgi.spi.capability.Capability;
+import org.jboss.osgi.testing.OSGiRuntime;
 
 /**
  * Adds the Blueprint capability to the {@link OSGiRuntime}
