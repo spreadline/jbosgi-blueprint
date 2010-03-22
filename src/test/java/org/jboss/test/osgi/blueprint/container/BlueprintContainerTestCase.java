@@ -181,6 +181,7 @@ public class BlueprintContainerTestCase
    }
 
    @Test
+   @SuppressWarnings("unchecked")
    public void getComponentIds() throws Exception
    {
       if (context == null)
@@ -200,6 +201,7 @@ public class BlueprintContainerTestCase
    }
 
    @Test
+   @SuppressWarnings("unchecked")
    public void testBeanMetadata() throws Exception
    {
       if (context == null)
@@ -219,6 +221,7 @@ public class BlueprintContainerTestCase
    }
 
    @Test
+   @SuppressWarnings("unchecked")
    public void testServiceMetadata() throws Exception
    {
       if (context == null)
@@ -251,6 +254,7 @@ public class BlueprintContainerTestCase
    }
 
    @Test
+   @SuppressWarnings("unchecked")
    public void testServiceReferenceMetadata() throws Exception
    {
       if (context == null)
