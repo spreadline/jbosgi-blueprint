@@ -28,27 +28,34 @@
   <artifactId>jboss-osgi-blueprint</artifactId>
   <packaging>bundle</packaging>
 
-  <version>1.0.0.Beta2-SNAPSHOT</version>
+  <version>1.0.0.Beta2</version>
 
   <!-- Parent -->
   <parent>
     <groupId>org.jboss.osgi</groupId>
     <artifactId>jboss-osgi-parent</artifactId>
-    <version>1.0.5-SNAPSHOT</version>
+    <version>1.0.5</version>
   </parent>
 
+  <!-- Subversion -->
+  <scm>
+    <connection>scm:svn:http://anonsvn.jboss.org/repos/jbossas/projects/jboss-osgi/projects/bundles/blueprint/tags/jboss-osgi-blueprint-1.0.0.Beta2</connection>
+    <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/jboss-osgi/projects/bundles/blueprint/tags/jboss-osgi-blueprint-1.0.0.Beta2</developerConnection>
+    <url>http://fisheye.jboss.com/qsearch/JBossOSGi/tags/jboss-osgi-blueprint-1.0.0.Beta2</url>
+  </scm>
+  
   <!-- Properties -->
   <properties>
-    <version.apache.aries.blueprint>0.1-incubating-SNAPSHOT</version.apache.aries.blueprint>
-    <version.apache.aries.jmx>0.1-incubating-SNAPSHOT</version.apache.aries.jmx>
-    <version.apache.aries.util>0.1-incubating-SNAPSHOT</version.apache.aries.util>
+    <version.apache.aries.blueprint>0.1-incubating-20100329</version.apache.aries.blueprint>
+    <version.apache.aries.jmx>0.1-incubating-20100329</version.apache.aries.jmx>
+    <version.apache.aries.util>0.1-incubating-20100329</version.apache.aries.util>
     <version.apache.felix.log>1.0.0</version.apache.felix.log>
-    <version.jboss.osgi.common>1.0.4-SNAPSHOT</version.jboss.osgi.common>
-    <version.jboss.osgi.framework>1.0.0.Alpha4-SNAPSHOT</version.jboss.osgi.framework>
-    <version.jboss.osgi.husky>1.0.4-SNAPSHOT</version.jboss.osgi.husky>
-    <version.jboss.osgi.jmx>1.0.4-SNAPSHOT</version.jboss.osgi.jmx>
-    <version.jboss.osgi.spi>1.0.5-SNAPSHOT</version.jboss.osgi.spi>
-    <version.jboss.osgi.vfs>1.0.0-SNAPSHOT</version.jboss.osgi.vfs>
+    <version.jboss.osgi.common>1.0.4</version.jboss.osgi.common>
+    <version.jboss.osgi.framework>1.0.0.Alpha4</version.jboss.osgi.framework>
+    <version.jboss.osgi.husky>1.0.4</version.jboss.osgi.husky>
+    <version.jboss.osgi.jmx>1.0.4</version.jboss.osgi.jmx>
+    <version.jboss.osgi.spi>1.0.5</version.jboss.osgi.spi>
+    <version.jboss.osgi.vfs>1.0.0</version.jboss.osgi.vfs>
     <version.osgi>4.2.0</version.osgi>
     
     <surefire.jpda.args />
@@ -306,13 +313,6 @@
     </plugins>
   </build>
 
-  <!-- Subversion -->
-  <scm>
-    <connection>scm:svn:http://anonsvn.jboss.org/repos/jbossas/projects/jboss-osgi/projects/bundles/blueprint/trunk</connection>
-    <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/jboss-osgi/projects/bundles/blueprint/trunk</developerConnection>
-    <url>http://fisheye.jboss.com/qsearch/JBossOSGi</url>
-  </scm>
-  
   <!-- Profiles -->
   <profiles>
 
