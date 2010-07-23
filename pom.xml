@@ -24,8 +24,8 @@
 
   <name>JBossOSGi Bundles - Blueprint</name>
 
-  <groupId>org.jboss.osgi.bundles</groupId>
-  <artifactId>jboss-osgi-blueprint</artifactId>
+  <groupId>org.jboss.osgi.blueprint</groupId>
+  <artifactId>jbosgi-blueprint</artifactId>
   <packaging>bundle</packaging>
 
   <version>1.0.0-SNAPSHOT</version>
@@ -34,27 +34,28 @@
   <parent>
     <groupId>org.jboss.osgi</groupId>
     <artifactId>jboss-osgi-parent</artifactId>
-    <version>1.0.5</version>
+    <version>1.0.7</version>
   </parent>
 
-  <!-- Subversion -->
+  <!-- Source Control -->
   <scm>
-    <connection>scm:svn:http://anonsvn.jboss.org/repos/jbossas/projects/jboss-osgi/projects/bundles/blueprint/trunk</connection>
-    <developerConnection>scm:svn:https://svn.jboss.org/repos/jbossas/projects/jboss-osgi/projects/bundles/blueprint/trunk</developerConnection>
-    <url>http://fisheye.jboss.com/qsearch/JBossOSGi</url>
+    <connection>scm:git:git://github.com/jbosgi/jbosgi-blueprint.git</connection>
+    <developerConnection>scm:git:git@github.com:jbosgi/jbosgi-blueprint.git</developerConnection>
+    <url>http://github.com/jbosgi/jbosgi-blueprint</url>
   </scm>
   
   <!-- Properties -->
   <properties>
-    <version.apache.aries.blueprint>0.1-incubating-20100329</version.apache.aries.blueprint>
-    <version.apache.aries.jmx>0.1-incubating-20100329</version.apache.aries.jmx>
-    <version.apache.aries.util>0.1-incubating-20100329</version.apache.aries.util>
+    <version.apache.aries.blueprint>0.1-incubating</version.apache.aries.blueprint>
+    <version.apache.aries.jmx>0.1-incubating</version.apache.aries.jmx>
+    <version.apache.aries.util>0.1-incubating</version.apache.aries.util>
     <version.apache.felix.log>1.0.0</version.apache.felix.log>
     <version.jboss.osgi.common>1.0.4</version.jboss.osgi.common>
-    <version.jboss.osgi.framework>1.0.0.Alpha4</version.jboss.osgi.framework>
-    <version.jboss.osgi.husky>1.0.4</version.jboss.osgi.husky>
-    <version.jboss.osgi.jmx>1.0.4</version.jboss.osgi.jmx>
-    <version.jboss.osgi.spi>1.0.5</version.jboss.osgi.spi>
+    <version.jboss.osgi.container>0.1-SNAPSHOT</version.jboss.osgi.container>
+    <version.jboss.osgi.husky>1.0.5</version.jboss.osgi.husky>
+    <version.jboss.osgi.jmx>1.0.7</version.jboss.osgi.jmx>
+    <version.jboss.osgi.resolver.felix>3.0.1</version.jboss.osgi.resolver.felix>
+    <version.jboss.osgi.spi>1.0.10</version.jboss.osgi.spi>
     <version.jboss.osgi.vfs>1.0.0</version.jboss.osgi.vfs>
     <version.osgi>4.2.0</version.osgi>
     
@@ -157,9 +158,21 @@
 
     <!-- Test Dependencies -->
     <dependency>
-      <groupId>org.jboss.osgi.framework</groupId>
-      <artifactId>jboss-osgi-framework-vfs30</artifactId>
-      <version>${version.jboss.osgi.framework}</version>
+      <groupId>org.jboss.osgi.container</groupId>
+      <artifactId>jbosgi-container-core</artifactId>
+      <version>${version.jboss.osgi.container}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.osgi.resolver</groupId>
+      <artifactId>jbosgi-resolver-felix</artifactId>
+      <version>${version.jboss.osgi.resolver.felix}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.osgi.vfs</groupId>
+      <artifactId>jboss-osgi-vfs30</artifactId>
+      <version>${version.jboss.osgi.vfs}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -177,10 +190,10 @@
         <artifactId>maven-bundle-plugin</artifactId>
         <configuration>
           <instructions>
-            <Bundle-SymbolicName>${artifactId}</Bundle-SymbolicName>
+            <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
             <Bundle-Activator>org.jboss.osgi.blueprint.internal.BlueprintActivator</Bundle-Activator>
             <Export-Package>
-              org.jboss.osgi.blueprint;version=${version},
+              org.jboss.osgi.blueprint;version=${project.version},
             </Export-Package>
             <Import-Package>
               javax.xml.parsers, 
@@ -264,7 +277,7 @@
             <configuration>
               <tasks>
                 <property name="maven.runtime.classpath" refid="maven.runtime.classpath" />
-                <property name="artifactId" value="${artifactId}" />
+                <property name="artifactId" value="${project.artifactId}" />
                 <property name="tests.output.dir" value="${project.build.directory}" />
                 <property name="build.artifact" value="${project.build.finalName}" />
                 <ant antfile="scripts/antrun-test-jars.xml" />
@@ -287,7 +300,7 @@
             </goals>
             <configuration>
               <skip>false</skip>
-              <argLine>${surefire.jpda.args}</argLine>
+              <argLine>-da ${surefire.jpda.args}</argLine>
               <systemProperties>
                 <property>
                   <name>java.protocol.handler.pkgs</name>

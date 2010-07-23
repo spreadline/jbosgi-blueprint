@@ -32,7 +32,7 @@ import org.jboss.osgi.testing.OSGiRuntime;
  * 
  * It is ignored if the {@link BlueprintService} is already registered.
  * 
- * Installed bundles: jboss-osgi-blueprint.jar, org.apache.aries.blueprint.jar  
+ * Installed bundles: jbosgi-blueprint.jar, org.apache.aries.blueprint.jar  
  * 
  * @author thomas.diesler@jboss.com
  * @since 05-May-2009
@@ -44,6 +44,6 @@ public class BlueprintCapability extends Capability
       super(BlueprintService.class.getName());
 
       addBundle("bundles/org.apache.aries.util.jar");
-      addBundle("bundles/jboss-osgi-blueprint.jar");
+      addBundle("bundles/jbosgi-blueprint.jar");
    }
 }
