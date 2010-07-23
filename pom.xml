@@ -9,8 +9,6 @@
   <!--                                                                        -->
   <!-- ====================================================================== -->
 
-  <!-- $Id$ -->
-
   <!--
     Set these VM properties in your IDE debugger
      
@@ -25,7 +23,7 @@
   <name>JBossOSGi Bundles - Blueprint</name>
 
   <groupId>org.jboss.osgi.blueprint</groupId>
-  <artifactId>jbosgi-blueprint</artifactId>
+  <artifactId>jboss-osgi-blueprint</artifactId>
   <packaging>bundle</packaging>
 
   <version>1.0.0-SNAPSHOT</version>
@@ -37,7 +35,7 @@
     <version>1.0.7</version>
   </parent>
 
-  <!-- Source Control -->
+  <!-- Source -->
   <scm>
     <connection>scm:git:git://github.com/jbosgi/jbosgi-blueprint.git</connection>
     <developerConnection>scm:git:git@github.com:jbosgi/jbosgi-blueprint.git</developerConnection>
@@ -50,9 +48,9 @@
     <version.apache.aries.jmx>0.1-incubating</version.apache.aries.jmx>
     <version.apache.aries.util>0.1-incubating</version.apache.aries.util>
     <version.apache.felix.log>1.0.0</version.apache.felix.log>
-    <version.jboss.osgi.common>1.0.4</version.jboss.osgi.common>
+    <version.jboss.osgi.common>1.0.5-SNAPSHOT</version.jboss.osgi.common>
     <version.jboss.osgi.container>0.1-SNAPSHOT</version.jboss.osgi.container>
-    <version.jboss.osgi.husky>1.0.5</version.jboss.osgi.husky>
+    <version.jboss.osgi.husky>1.0.6-SNAPSHOT</version.jboss.osgi.husky>
     <version.jboss.osgi.jmx>1.0.7</version.jboss.osgi.jmx>
     <version.jboss.osgi.resolver.felix>3.0.1</version.jboss.osgi.resolver.felix>
     <version.jboss.osgi.spi>1.0.10</version.jboss.osgi.spi>
@@ -124,13 +122,13 @@
       </exclusions>
     </dependency>
     <dependency>
-      <groupId>org.jboss.osgi.bundles</groupId>
+      <groupId>org.jboss.osgi.common</groupId>
       <artifactId>jboss-osgi-common</artifactId>
       <version>${version.jboss.osgi.common}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.jboss.osgi.bundles</groupId>
+      <groupId>org.jboss.osgi.husky</groupId>
       <artifactId>jboss-osgi-husky</artifactId>
       <version>${version.jboss.osgi.husky}</version>
       <scope>provided</scope>
