@@ -32,7 +32,7 @@
   <parent>
     <groupId>org.jboss.osgi</groupId>
     <artifactId>jboss-osgi-parent</artifactId>
-    <version>1.0.7</version>
+    <version>1.0.9-SNAPSHOT</version>
   </parent>
 
   <!-- Source -->
@@ -49,11 +49,11 @@
     <version.apache.aries.util>0.1-incubating</version.apache.aries.util>
     <version.apache.felix.log>1.0.0</version.apache.felix.log>
     <version.jboss.osgi.common>1.0.5-SNAPSHOT</version.jboss.osgi.common>
-    <version.jboss.osgi.container>0.1-SNAPSHOT</version.jboss.osgi.container>
+    <version.jboss.osgi.container>1.0.0.Alpha7-SNAPSHOT</version.jboss.osgi.container>
     <version.jboss.osgi.husky>1.0.6-SNAPSHOT</version.jboss.osgi.husky>
     <version.jboss.osgi.jmx>1.0.7</version.jboss.osgi.jmx>
     <version.jboss.osgi.resolver.felix>3.0.1</version.jboss.osgi.resolver.felix>
-    <version.jboss.osgi.spi>1.0.10</version.jboss.osgi.spi>
+    <version.jboss.osgi.spi>1.0.11-SNAPSHOT</version.jboss.osgi.spi>
     <version.jboss.osgi.vfs>1.0.0</version.jboss.osgi.vfs>
     <version.osgi>4.2.0</version.osgi>
     
@@ -174,8 +174,8 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.jboss.logging</groupId>
-      <artifactId>jboss-logging-log4j</artifactId>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
