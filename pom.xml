@@ -32,7 +32,7 @@
   <parent>
     <groupId>org.jboss.osgi</groupId>
     <artifactId>jboss-osgi-parent</artifactId>
-    <version>1.0.9-SNAPSHOT</version>
+    <version>1.0.9</version>
   </parent>
 
   <!-- Source -->
@@ -48,12 +48,11 @@
     <version.apache.aries.jmx>0.1-incubating</version.apache.aries.jmx>
     <version.apache.aries.util>0.1-incubating</version.apache.aries.util>
     <version.apache.felix.log>1.0.0</version.apache.felix.log>
-    <version.jboss.osgi.common>1.0.5-SNAPSHOT</version.jboss.osgi.common>
-    <version.jboss.osgi.container>1.0.0.Alpha7-SNAPSHOT</version.jboss.osgi.container>
-    <version.jboss.osgi.husky>1.0.6-SNAPSHOT</version.jboss.osgi.husky>
+    <version.jboss.osgi.common>1.0.5</version.jboss.osgi.common>
+    <version.jboss.osgi.husky>1.0.6</version.jboss.osgi.husky>
     <version.jboss.osgi.jmx>1.0.7</version.jboss.osgi.jmx>
-    <version.jboss.osgi.resolver.felix>3.0.1</version.jboss.osgi.resolver.felix>
-    <version.jboss.osgi.spi>1.0.11-SNAPSHOT</version.jboss.osgi.spi>
+    <version.jboss.osgi.felix>3.0.1</version.jboss.osgi.felix>
+    <version.jboss.osgi.spi>1.0.11</version.jboss.osgi.spi>
     <version.jboss.osgi.vfs>1.0.0</version.jboss.osgi.vfs>
     <version.osgi>4.2.0</version.osgi>
     
@@ -156,15 +155,9 @@
 
     <!-- Test Dependencies -->
     <dependency>
-      <groupId>org.jboss.osgi.container</groupId>
-      <artifactId>jbosgi-container-core</artifactId>
-      <version>${version.jboss.osgi.container}</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.jboss.osgi.resolver</groupId>
-      <artifactId>jbosgi-resolver-felix</artifactId>
-      <version>${version.jboss.osgi.resolver.felix}</version>
+      <groupId>org.jboss.osgi.felix</groupId>
+      <artifactId>jboss-osgi-felix</artifactId>
+      <version>${version.jboss.osgi.felix}</version>
       <scope>test</scope>
     </dependency>
     <dependency>
