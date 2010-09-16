@@ -14,8 +14,8 @@
       <outputDirectory>bundles</outputDirectory>
       <outputFileNameMapping>${artifact.artifactId}${dashClassifier?}.${artifact.extension}</outputFileNameMapping>
       <includes>
+        <include>*:arquillian-osgi-bundle:jar</include>
         <include>*:jboss-osgi-common:jar</include>
-        <include>*:jboss-osgi-husky:jar</include>
         <include>*:jboss-osgi-jmx:jar</include>
         <include>*:org.apache.aries.jmx:jar</include>
         <include>*:org.apache.aries.util:jar</include>

@@ -45,9 +45,6 @@
 
     <!-- Please add alphabetically -->
 
-    <!-- context -->
-    <bnd classpath="${tests.classes.dir}" output="${tests.output.dir}/test-libs/container-basic.jar" files="${tests.resources.dir}/container/container-basic.bnd" />
-
     <!-- Please add alphabetically -->
 
   </target>
