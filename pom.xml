@@ -47,12 +47,12 @@
     <version.apache.aries.jmx>0.1-incubating</version.apache.aries.jmx>
     <version.apache.aries.util>0.1-incubating</version.apache.aries.util>
     <version.apache.felix.log>1.0.0</version.apache.felix.log>
-    <version.jboss.arquillian>1.0.0-SNAPSHOT</version.jboss.arquillian>
-    <version.jboss.osgi.common>1.0.6-SNAPSHOT</version.jboss.osgi.common>
+    <version.jboss.arquillian>1.0.0.Alpha4.SP1</version.jboss.arquillian>
+    <version.jboss.osgi.common>1.0.6</version.jboss.osgi.common>
     <version.jboss.osgi.deployment>1.0.4</version.jboss.osgi.deployment>
-    <version.jboss.osgi.jmx>1.0.8-SNAPSHOT</version.jboss.osgi.jmx>
+    <version.jboss.osgi.jmx>1.0.8</version.jboss.osgi.jmx>
     <version.jboss.osgi.felix>3.0.1</version.jboss.osgi.felix>
-    <version.jboss.osgi.spi>1.0.14-SNAPSHOT</version.jboss.osgi.spi>
+    <version.jboss.osgi.spi>1.0.14</version.jboss.osgi.spi>
     <version.jboss.osgi.vfs>1.0.0</version.jboss.osgi.vfs>
     <version.osgi>4.2.0</version.osgi>
     
@@ -90,11 +90,6 @@
         </exclusion>
       </exclusions>
       <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.jboss.arquillian.container</groupId>
-      <artifactId>arquillian-osgi-embedded</artifactId>
-      <version>${version.jboss.arquillian}</version>
     </dependency>
       
     <!-- Provided Dependencies -->
@@ -172,6 +167,12 @@
     </dependency>
 
     <!-- Test Dependencies -->
+    <dependency>
+      <groupId>org.jboss.arquillian.container</groupId>
+      <artifactId>arquillian-osgi-embedded</artifactId>
+      <version>${version.jboss.arquillian}</version>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>org.jboss.osgi.felix</groupId>
       <artifactId>jboss-osgi-felix</artifactId>
