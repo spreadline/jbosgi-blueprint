@@ -25,7 +25,7 @@
   <artifactId>jboss-osgi-blueprint</artifactId>
   <packaging>bundle</packaging>
 
-  <version>1.0.1-SNAPSHOT</version>
+  <version>1.0.1</version>
 
   <!-- Parent -->
   <parent>
