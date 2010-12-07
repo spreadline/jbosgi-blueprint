@@ -12,17 +12,17 @@
   <!--
     Set these VM properties in your IDE debugger
      
-      -Dlog4j.output.dir=${workspace_loc:jboss-osgi-blueprint/target}
-      -Dtest.archive.directory=${workspace_loc:jboss-osgi-blueprint/target}/test-libs
+      -Dlog4j.output.dir=${workspace_loc:jbosgi-blueprint/target}
+      -Dtest.archive.directory=${workspace_loc:jbosgi-blueprint/target}/test-libs
   -->
   
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <name>JBossOSGi Bundles - Blueprint</name>
+  <name>JBossOSGi - Blueprint</name>
 
   <groupId>org.jboss.osgi.blueprint</groupId>
-  <artifactId>jboss-osgi-blueprint</artifactId>
+  <artifactId>jbosgi-blueprint</artifactId>
   <packaging>bundle</packaging>
 
   <version>1.0.2-SNAPSHOT</version>
@@ -47,13 +47,13 @@
     <version.apache.aries.jmx>0.1-incubating</version.apache.aries.jmx>
     <version.apache.aries.util>0.1-incubating</version.apache.aries.util>
     <version.apache.felix.log>1.0.0</version.apache.felix.log>
-    <version.jboss.arquillian>1.0.0.Alpha4.SP1</version.jboss.arquillian>
+    <version.jboss.arquillian>1.0.0.Alpha4.SP5-SNAPSHOT</version.jboss.arquillian>
     <version.jboss.osgi.common>1.0.6</version.jboss.osgi.common>
-    <version.jboss.osgi.deployment>1.0.4</version.jboss.osgi.deployment>
-    <version.jboss.osgi.jmx>1.0.8</version.jboss.osgi.jmx>
-    <version.jboss.osgi.felix>3.0.1</version.jboss.osgi.felix>
-    <version.jboss.osgi.spi>1.0.14</version.jboss.osgi.spi>
-    <version.jboss.osgi.vfs>1.0.0</version.jboss.osgi.vfs>
+    <version.jboss.osgi.deployment>1.0.9</version.jboss.osgi.deployment>
+    <version.jboss.osgi.jmx>1.0.9</version.jboss.osgi.jmx>
+    <version.jboss.osgi.felix>3.0.4</version.jboss.osgi.felix>
+    <version.jboss.osgi.spi>1.0.19</version.jboss.osgi.spi>
+    <version.jboss.osgi.vfs>1.0.4</version.jboss.osgi.vfs>
     <version.osgi>4.2.0</version.osgi>
     
     <surefire.jpda.args />
@@ -68,13 +68,13 @@
   
     <!-- Compile Dependencies -->
     <dependency>
-      <groupId>org.jboss.osgi</groupId>
-      <artifactId>jboss-osgi-spi</artifactId>
+      <groupId>org.jboss.osgi.spi</groupId>
+      <artifactId>jbosgi-spi</artifactId>
       <version>${version.jboss.osgi.spi}</version>
     </dependency>
     <dependency>
       <groupId>org.jboss.osgi.deployment</groupId>
-      <artifactId>jboss-osgi-deployment</artifactId>
+      <artifactId>jbosgi-deployment</artifactId>
       <version>${version.jboss.osgi.deployment}</version>
     </dependency>
 
@@ -216,6 +216,7 @@
               
               org.jboss.osgi.deployment.interceptor;version="[1.0,2.0)";resolution:=optional,
               org.jboss.osgi.spi*;version="[1.0,2.0)",
+              org.jboss.osgi.xml;version="[2.9,3.0)";resolution:=optional,
               
               org.osgi.framework,
               org.osgi.service.blueprint*;version="[1.0,2.0)",

@@ -24,7 +24,7 @@ package org.jboss.osgi.blueprint;
 //$Id$
 
 /**
- * A marker service that is registered by jboss-osgi-blueprint
+ * A marker service that is registered by jbosgi-blueprint
  * 
  * @author thomas.diesler@jboss.com
  * @since 29-May-2009

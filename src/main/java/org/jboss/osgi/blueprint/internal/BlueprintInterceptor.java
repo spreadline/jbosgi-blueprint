@@ -119,9 +119,18 @@ public class BlueprintInterceptor extends AbstractLifecycleInterceptor implement
          if (pathList.isEmpty() == false)
          {
             log.debug("Create blueprint container");
-            BlueprintContainerImpl blueprintContainer = new BlueprintContainerImpl(bundle.getBundleContext(), context.getBundle(), eventDispatcher, handlers, executors, pathList);
-            containers.put(bundle, blueprintContainer);
-            blueprintContainer.schedule();
+            ClassLoader tccl = Thread.currentThread().getContextClassLoader();
+            try
+            {
+               Thread.currentThread().setContextClassLoader(BlueprintActivator.class.getClassLoader());
+               BlueprintContainerImpl blueprintContainer = new BlueprintContainerImpl(bundle.getBundleContext(), context.getBundle(), eventDispatcher, handlers, executors, pathList);
+               containers.put(bundle, blueprintContainer);
+               blueprintContainer.schedule();
+            }
+            finally
+            {
+               Thread.currentThread().setContextClassLoader(tccl);
+            }
          }
       }
       else if (state == Bundle.STOPPING)
