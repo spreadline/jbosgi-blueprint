@@ -47,7 +47,7 @@
     <version.apache.aries.jmx>0.1-incubating</version.apache.aries.jmx>
     <version.apache.aries.util>0.1-incubating</version.apache.aries.util>
     <version.apache.felix.log>1.0.0</version.apache.felix.log>
-    <version.jboss.arquillian>1.0.0.Alpha4.SP5-SNAPSHOT</version.jboss.arquillian>
+    <version.jboss.arquillian>1.0.0.Alpha4.SP5</version.jboss.arquillian>
     <version.jboss.osgi.common>1.0.6</version.jboss.osgi.common>
     <version.jboss.osgi.deployment>1.0.9</version.jboss.osgi.deployment>
     <version.jboss.osgi.jmx>1.0.9</version.jboss.osgi.jmx>
